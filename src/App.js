@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import fetchGallery from './services/PixabayAPI';
 
-
+import Searchbar from './components/Searchbar/Searchbar';
 
 
 class App extends Component{
@@ -13,20 +13,27 @@ class App extends Component{
           showModal: false,
         }
 
+        
+  
   componentDidMount() {
-    axios
-      .get('https://pixabay.com/api/?q=лето&page=номер_страницы&key=21271136-bb8fcb5deeeca7c55db92c216&image_type=photo&orientation=horizontal&per_page=12')
-      .then(response => {
-        // console.log(response.data));
-        this.setState({ pictures: response.data });
-      })
-      .catch(error => this.setState({ error }));
+ 
+
+    
     }
 
+   onChangeQuerry = (searchQuery) => {
+    this.setState({
+      query: searchQuery,
+      page: 1,
+      pictures: [],
+    })
+  }   
+  
   render() {
 
         return (
           <div>
+            <Searchbar onFormSubmit={this.onChangeQuerry}/>
             Test
             </div>
         );
