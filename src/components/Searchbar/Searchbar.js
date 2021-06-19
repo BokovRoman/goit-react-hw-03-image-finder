@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 
 class Searchbar extends Component {
     state = {
-        searchQuerry: '',
-    }
+        query: '',
+    };
 
     onSearchInputChange = (e) => {
         this.setState({
-             searchQuerry:e.target.value,
-         })
-    }
+            query: e.target.value,
+        });
+    };
     
     onSearchFormSubmit = (e) => {
         e.preventDefault();
-        this.props.onFormSubmit(this.state.searchQuery)
-        this.setState({ searchQuery: "" })
-    }
+        this.props.onSubmit(this.state.query);
+        this.setState({ query: '' });
+    };
     
     render() {
         return (
@@ -26,7 +26,7 @@ class Searchbar extends Component {
                     </button>
 
                     <input
-                        value={this.state.searchQuerry}
+                        value={this.state.query}
                         onChange={this.onSearchInputChange}
                     className="SearchForm-input"
                     type="text"
