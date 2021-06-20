@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
-import fetchGalleryAPI from './services/PixabayAPI';
+import React, { Component } from 'react';
+import styles from './App.module.css';
 
+
+import fetchGalleryAPI from './services/PixabayAPI';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import Button from './components/Button/Button';
@@ -88,9 +90,15 @@ class App extends Component{
         const ShouldButtonBeVisible = images.length > 0 && !isLoading;
         
       return (
-        <div>
+        <div className={styles.App}>
+          <Searchbar onSubmit={this.onChangeQuery} />
           {isLoading && <Loader />}
-            <Searchbar onSubmit={this.onChangeQuery} />
+          {error && (
+          <h1>
+            Sorry!But downloading has been enterapted due error:
+            <span style={{ color: "red" }}> {error}</span>
+          </h1>
+        )}
             <ImageGallery images={images} onImageClick={this.onImageClick} />
              {ShouldButtonBeVisible && <Button onClick={this.searchImages} />}  
             {largeImage.src !== "" && (
